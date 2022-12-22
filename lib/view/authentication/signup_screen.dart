@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:in_app_purchase_demo/view/authentication/signin_screen.dart';
 import '../../common/button.dart';
 import '../../common/data_object.dart';
 import '../../common/flutter_toast.dart';
@@ -164,14 +165,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               EasyLoading.dismiss();
                               Get.defaultDialog(
                                 middleText:
-                                    "Verify with the email and password",
+                                    "Verify with the email and password..",
                                 actions: [
                                   CommonButton(
                                     onTap: () {
-                                      ///Call subscription Page
-                                      Get.to(() => const SubscriptionPage());
+                                      Get.to(() => const SignInScreen());
                                     },
-                                    buttonLabel: AppStrings.interest,
+                                    buttonLabel: AppStrings.signIn,
                                   )
                                 ],
                               );

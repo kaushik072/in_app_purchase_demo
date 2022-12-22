@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../common/button.dart';
 import '../../common/text_style.dart';
+import '../../core/user_handling.dart';
 import '../../core/utils/colors.dart';
 import '../../common/text_field.dart';
 import '../../common/validator.dart';
@@ -24,7 +25,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   LoginController loginController = Get.put(LoginController());
 
-  GlobalKey<FormState> _loginformKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _loginformKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -119,8 +120,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ],
                               ),
                             ),
+                            SizedBox(width: 20,),
                             InkWell(
                                 onTap: () async {
+                                  Helper.clearUserData();
                                   await FirebaseAuth.instance.signOut();
                                 },
                                 child: const Text("LogOut"))
