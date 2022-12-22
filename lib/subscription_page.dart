@@ -1,5 +1,4 @@
 // ignore_for_file: depend_on_referenced_packages
-
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -23,8 +22,6 @@ class SubscriptionPage extends StatefulWidget {
 String sub1Id =
     Platform.isAndroid ? 'android.test.purchased' : 'your_ios_sub1_id';
 
-var _productIdList = {'product1', 'product2', 'product3'};
-
 //Subscription 02
 String sub2Id = Platform.isAndroid ? 'silver_subscription' : 'your_ios_sub2_id';
 
@@ -47,7 +44,6 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   void initState() {
     expiryDateValue(timestamp: "1664620531634");
     _inAppPurchase.restorePurchases();
-    print(_inAppPurchase.restorePurchases());
 
     ///Step: 1
     final Stream<List<PurchaseDetails>> purchaseUpdated =
@@ -109,22 +105,16 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
         _queryProductError = null;
         _isAvailable = isAvailable;
         _products = productDetailResponse.productDetails;
-        // _purchases=[];
         _notFoundIds = productDetailResponse.notFoundIDs;
-        print('keval2---${_notFoundIds.toList()}');
-        print('error---${productDetailResponse.error}');
         _loading = false;
       });
       return;
-    } else {
-      // print('keval---${productDetailResponse.productDetails.first.toString()}');
-    }
+    } else {}
 
     setState(() {
       _isAvailable = isAvailable;
       _products = productDetailResponse.productDetails;
       _notFoundIds = productDetailResponse.notFoundIDs;
-      print('keval${_notFoundIds.toList()}');
       _purchasePending = false;
       _loading = false;
     });
@@ -202,7 +192,6 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
           userData = snapshot.data!;
           if (userData.oldPdFromDb != null) {
             checkForSubStatus(userData.oldPdFromDb!.productID);
-            // activeSubId = userData.oldPdFromDb!.productID;
           }
 
           return SafeArea(
@@ -283,7 +272,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                             Container(
                               width: double.maxFinite,
                               height: double.maxFinite,
-                              color: Colors.black87,
+                              color: AppColors.primaryColor,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: const [
@@ -320,8 +309,8 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    ///Product title
                     Text(pd.title,
-                        // 'Product title',
                         style: const TextStyle(
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
@@ -329,6 +318,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                     const SizedBox(
                       height: 5,
                     ),
+                    ///Product price
                     Text(pd.price,
                         // 'Price',
                         style: const TextStyle(

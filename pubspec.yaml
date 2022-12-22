@@ -38,20 +38,13 @@ dependencies:
   shared_preferences: ^2.0.15
   cloud_functions: ^3.2.9
   firebase_messaging: ^13.0.2
-
   fluttertoast: ^8.0.9
   flutter_easyloading: ^3.0.5
   get_storage: ^2.0.3
-
   firebase_auth: 3.10.0
-
-
   firebase_core: ^1.23.0
   cloud_firestore: ^3.4.9
   get: ^4.6.5
-
-
-
 
 dev_dependencies:
   flutter_test:

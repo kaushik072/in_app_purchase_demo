@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
+
+// ignore: depend_on_referenced_packages
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 import 'package:in_app_purchase_demo/function/expirydate.dart';
@@ -17,8 +19,6 @@ class SubscriptionDbService {
 
     GooglePlayPurchaseDetails gpp =
         purchaseDetails as GooglePlayPurchaseDetails;
-    print("Data :: ${gpp.billingClientPurchase.originalJson}");
-    print("purchaseTime :: ${gpp.billingClientPurchase.purchaseTime}");
     Map map = {
       'developerPayload': gpp.billingClientPurchase.developerPayload,
       'isAcknowledged': gpp.billingClientPurchase.isAcknowledged,
@@ -60,10 +60,9 @@ class SubscriptionDbService {
 
   Stream<UserData> get featchUserDataFromDb {
     Map<String, dynamic>? userData = Helper.checkLogIn();
-    print("userData!['userId']=====${userData!['userId']}");
     return _firestore
         .collection('user')
-        .doc(userData['userId'])
+        .doc(userData!['userId'])
         .snapshots()
         .map((event) => userDataFromSnapshot(event));
   }
@@ -74,7 +73,7 @@ class SubscriptionDbService {
         purchaseDetails as GooglePlayPurchaseDetails;
     await _firestore.collection('user').doc(userData!['userId']).update({
       'purchaseTime': gpp.billingClientPurchase.purchaseTime,
-    }).then((value) => debugPrint('Update the Date=================='));
+    }).then((value) => debugPrint('Update the Date'));
   }
 
   UserData userDataFromSnapshot(DocumentSnapshot ds) {
@@ -98,8 +97,7 @@ class SubscriptionDbService {
         obfuscatedProfileId: pw['obfuscatedProfileId'],
         skus: [],
       ));
-    } catch (e) {
-    }
+    } catch (e) {}
     return UserData(oldPdFromDb: oldPd, username: ds.get('name'));
   }
 
@@ -124,5 +122,6 @@ class SubscriptionDbService {
 class UserData {
   String username;
   GooglePlayPurchaseDetails? oldPdFromDb;
+
   UserData({required this.username, required this.oldPdFromDb});
 }

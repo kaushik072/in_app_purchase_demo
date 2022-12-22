@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 DateTime expiryDateValue({required String timestamp}) {
   DateTime twentyEightDaysFromNow =
       timeConverted(timestamp: '1664620531634').add(const Duration(days: 28));
-  debugPrint("fiftyDaysFromNow $twentyEightDaysFromNow");
+  debugPrint("fiftyDaysFromNow :: $twentyEightDaysFromNow");
   return twentyEightDaysFromNow;
 }
 

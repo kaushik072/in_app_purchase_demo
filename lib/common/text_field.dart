@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../core/utils/colors.dart';
 
-
 Widget textFormField(
     {required TextEditingController controller,
     required FormFieldValidator<String>? validator,
